@@ -6,3 +6,7 @@
 ### docker-for-hexo
 
 一个hexo的镜像
+
+### alpine
+
+Alpine Linux是一种基于musl libc和BusyBox的面向安全性和轻量级的GNU/Linux发行版
