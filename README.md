@@ -12,4 +12,4 @@
 Alpine Linux是一种基于musl libc和BusyBox的面向安全性和轻量级的GNU/Linux发行版
 
 ### redis
-根据官方redis镜像调整，主要修改为国内时区
+根据官方redis镜像调整，主要将镜像时区修改为国内时区
