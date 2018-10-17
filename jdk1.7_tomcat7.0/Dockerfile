@@ -1,8 +1,7 @@
 # 版本信息
-FROM centos:latest
+FROM leebroncc/myjdk1.7
 MAINTAINER gravel "leebroncc@163.com"
 
-ENV LANG en_US.UTF-8
 
 # add tomcat
 RUN mkdir -p /opt
