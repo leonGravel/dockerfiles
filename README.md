@@ -27,3 +27,7 @@ docker build -t mydocs .
 ```
 docker run -d -p 3000:3000 -v $(pwd):/usr/local/docsify mydocs
 ```
+
+### mvn-in-docker
+
+在mvn镜像里面安装docker,主要用于gitlab ci构建，可以在maven打包的同时，构建镜像。
