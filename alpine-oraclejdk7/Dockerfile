@@ -6,10 +6,8 @@ ENV JAVA_VERSION=7 \
     JAVA_UPDATE=80 \
     JAVA_HOME="/usr/lib/jvm/default-jvm"
 
-##需要自己下载jdk,因为jdk1.7官网已经不支持直接下载了
-COPY jdk-7u80-linux-x64.tar.gz /tmp/
-
 RUN cd /tmp && \
+    wget -c "http://95.216.9.60:9000/base/jdk-7u80-linux-x64.tar.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20181022%2F%2Fs3%2Faws4_request&X-Amz-Date=20181022T173514Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=c45c6cd265a7a1f4f67df7c0d4f14ba0bf3e8932cfc9f1de693386d219716acf" -O jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz  && \
     tar xzf "jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" && \
     mkdir -p /usr/lib/jvm && \
     mv "/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}" "/usr/lib/jvm/java-${JAVA_VERSION}-oracle" && \
