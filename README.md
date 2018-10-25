@@ -7,9 +7,9 @@
 
 一个hexo的镜像
 
-### alpine
+### base-alpine
+基于alpine3.6构建，支持中文字符集，以及中国时区支持
 
-Alpine Linux是一种基于musl libc和BusyBox的面向安全性和轻量级的GNU/Linux发行版
 
 ### redis
 根据官方redis镜像调整，主要将镜像时区修改为国内时区
@@ -31,3 +31,8 @@ docker run -d -p 3000:3000 -v $(pwd):/usr/local/docsify mydocs
 ### mvn-in-docker
 
 在mvn镜像里面安装docker,主要用于gitlab ci构建，可以在maven打包的同时，构建镜像。
+
+### alpine-oraclejdk7
+基于base-alpine构建的oraclejdk7镜像
+### alpine-oraclejdk8
+基于base-alpine构建的oraclejdk8镜像
