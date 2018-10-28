@@ -1,7 +1,7 @@
 # DockerHub
 ### jdk1.7_tomcat7.0
 
-基于alpine的oraclejdk和tomcat镜像
+基于base-alpine的oraclejdk和tomcat镜像
 
 ### docker-for-hexo
 
