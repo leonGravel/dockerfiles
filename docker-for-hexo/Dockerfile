@@ -1,12 +1,31 @@
-FROM node:slim
+FROM node:alpine
 MAINTAINER gravel <leebroncc@gmail.com>
-# instal basic tool and install hexo 
-RUN apt-get update && apt-get install -y git ssh-client ca-certificates --no-install-recommends && \
-	rm -r /var/lib/apt/lists/* && \
-	npm install hexo-cli -g && \
-	mkdir /hexo 
 
 # set home dir
 WORKDIR /hexo
+
+# instal basic tool 
+RUN apk --update --no-progress add git openssh && \
+    npm install hexo-cli -g && \
+    hexo init . &&\
+    npm install && \
+    npm install hexo-generator-sitemap --save  && \
+    npm install hexo-generator-feed --save && \
+    npm install hexo-deployer-git --save && \
+    npm install hexo-tag-bootstrap --save && \
+    npm install hexo-generator-search --save && \
+    npm install hexo-admin --save && \
+    apk add tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone 
+
+#  set volume 
+VOLUME ["/hexo/source", "/hexo/themes", "/root/.ssh"]
+
+# expose port
 EXPOSE 4000
-CMD ["/bin/bash"]
+
+# set the cmd shell
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
