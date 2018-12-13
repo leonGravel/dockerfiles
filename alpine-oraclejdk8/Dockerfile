@@ -16,7 +16,7 @@ RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip &
     mkdir -p "/usr/lib/jvm" && \
     mv "/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}" "/usr/lib/jvm/java-${JAVA_VERSION}-oracle" && \
     ln -s "java-${JAVA_VERSION}-oracle" "$JAVA_HOME" && \
-    ln -s "$JAVA_HOME/bin/*" "/usr/bin/" && \
+    ln -s $JAVA_HOME/bin/* /usr/bin/ && \
     rm -rf "$JAVA_HOME/"*src.zip && \
     wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
         "http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip" && \
