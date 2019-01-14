@@ -1,6 +1,6 @@
 # 版本信息
 FROM leebroncc/myjdk1.7
-MAINTAINER gravel "leebroncc@163.com"
+MAINTAINER gravel "leebroncc@gmail.com"
 
 
 # add tomcat
