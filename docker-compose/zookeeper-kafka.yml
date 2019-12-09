@@ -1,13 +1,31 @@
-version: '3'
-services:
-  download_zookeeper_1:
+version: '2'
+services:   
+   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: zookeeper
+    restart: always
+    hostname: zookeeper
+    networks:
+         extnetwork:
     ports:
       - "2181:2181"
-  download_kafka_1:
+
+   kafka:
     image: wurstmeister/kafka
+    container_name: kafka
+    hostname: kafka
+    restart: always
     ports:
       - "9092:9092"
+    networks:
+         extnetwork:
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.88.14
-      KAFKA_ZOOKEEPER_CONNECT: download_zookeeper_1:2181
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+ 
+networks:
+   extnetwork:
+      ipam:
+         config:
+         - subnet: 172.24.0.0/16
+           gateway: 172.24.0.1
