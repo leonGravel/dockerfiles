@@ -1,0 +1,49 @@
+# cat docker-compose.yml
+version: "3"
+services:
+  zabbix-db:
+    image: mysql:5.7
+    container_name: zabbix-db
+    environment:
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=12345678
+    volumes:
+      - "${PWD}/mysql:/var/lib/mysql"
+
+  zabbix-server-mysql:
+    image: zabbix/zabbix-server-mysql:latest
+    container_name: zabbix-server-mysql
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=12345678
+
+    ports:
+      - "10051:10051"
+    links:
+      - zabbix-db:mysql
+    depends_on:
+      - zabbix-db
+
+
+  zabbix-web-nginx-mysql:
+    image: zabbix/zabbix-web-nginx-mysql:latest
+    container_name: zabbix-web-nginx-mysql
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=12345678
+      - TZ=Asia/Shanghai
+    ports:
+      - "8081:80"
+    links:
+      - zabbix-db:mysql
+      - zabbix-server-mysql:zabbix-server
+    depends_on:
+      - zabbix-server-mysql
